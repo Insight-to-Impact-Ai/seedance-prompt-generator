@@ -20,21 +20,31 @@ Drama / grief example:
 
 Preview each with 3–4 short lines: palette, one physical feature, one sound, the emotional read.
 
-## Q2 — Action / emotional beat (header: "Action" or "The beat")
+## Q2 — The turn (header: "The turn")
 
-Ask: "What's the action beat at the center of it?" / "What's the moment the scene is built around?"
+Ask: "What's the moment the scene changes, and who or what does it happen to?"
 
-Action example:
-- Disarm, hand to hand — 3 beats in ~3s, no gunfire; safest to generate
-- Gun draw standoff — stillness, not motion; most restrained
-- Foot chase / parkour — highest energy; needs the most seconds per shot
-- No violence, pure tension — sees it, decides, leaves
+Every option names a second party or a physical rule. An option like "he runs across a rooftop" is an activity, not a turn; "he clears the gap and a hand grabs his ankle from the fire escape" is a turn. The preview sketches setup → turn → payoff in three short lines so the user can see the whole shape.
+
+Action / spy example:
+- Disarm, hand to hand — a guard steps out of the mirror-line; three beats in ~3s, no gunfire; safest to generate
+- The callback standoff — he asks a question at the table, the answer starts the fight, he asks it again standing over the man
+- Foot chase / parkour — something is behind him (a searchlight, a door banging open); he clears the gap and the last shot shows what he was running toward
+- No violence, pure tension — he sees the tail in the mirror, decides, and walks out through the kitchen
 
 Grief example:
-- He finds her — the discovery
-- He carries her — wrapped, only the tail showing
-- He can't put her down — stands holding her
-- He speaks to her — the line is the beat
+- He finds her — the discovery, and the bowl he filled that morning still full
+- He carries her — wrapped, only the tail showing, out to the car
+- He can't put her down — stands holding her while someone waits at the door
+- He speaks to her — the habitual line arriving too late
+
+Drama / everyday example:
+- The third party — someone else's story is the real one (a nervous kid beside him, a friend in love with the waitress); the payoff is what he does about it
+- The reversal — what he appears to be doing is not what he is doing; the reveal is in a prop or a wardrobe change
+- The rule that holds — a line, a table, a circle he or the other party cannot cross, and the scene tests it
+- The slow crack — one locked shot, one face, pressure that builds until it snaps
+
+Whichever the user picks, write the turn in one sentence in the reply before writing the story.
 
 ## Q3 — Shot count (header: "Shot count")
 
