@@ -1,0 +1,336 @@
+<title>Carrying Rosie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* TEMPLATE NOTES (delete this comment when filling):
+     - Swap --honey / --dusk for two accent tokens drawn from the scene's COLOR LOGIC.
+       Give the neutrals a slight bias toward the accent. Keep every other token.
+     - Keep the type stack, layout, classes and the two <script> blocks verbatim.
+     - Fill: <title>, .eyebrow, h1, .lede, .maprow chips, .specs chips, the three
+       columns, the .aside backstory, and the raw prompt in #raw. */
+  :root{
+    --ground:#E9E6E1; --surface:#F4F2EE; --surface-2:#DAD5CD;
+    --ink:#1C1A17; --ink-2:#54504A; --ink-3:#837D74;
+    --rule:#C8C3B9; --rule-soft:#D9D5CC;
+    --honey:#A06A24; --dusk:#465B63;
+    --shadow:0 1px 2px rgba(28,26,23,.07);
+    --display:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --ui:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#141311; --surface:#1C1A17; --surface-2:#252220;
+      --ink:#ECE8E1; --ink-2:#ABA69C; --ink-3:#7A746A;
+      --rule:#302C26; --rule-soft:#272420;
+      --honey:#D6A254; --dusk:#88A6AE;
+      --shadow:0 1px 2px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#141311; --surface:#1C1A17; --surface-2:#252220;
+    --ink:#ECE8E1; --ink-2:#ABA69C; --ink-3:#7A746A;
+    --rule:#302C26; --rule-soft:#272420;
+    --honey:#D6A254; --dusk:#88A6AE;
+    --shadow:0 1px 2px rgba(0,0,0,.45);
+  }
+
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--ui); font-size:14px; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1320px; margin:0 auto; padding-inline:20px; padding-block:26px 44px; }
+
+  .eyebrow{
+    font-family:var(--ui); font-size:10px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--honey); margin:0;
+  }
+  h1{
+    font-family:var(--display); font-weight:400;
+    font-size:clamp(34px,6vw,52px); line-height:1.02; letter-spacing:-.01em;
+    margin:6px 0 0; text-wrap:balance;
+  }
+  .lede{ color:var(--ink-2); font-size:13px; margin:8px 0 0; max-width:64ch; }
+
+  .topbar{
+    display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+    gap:18px; padding-bottom:16px; border-bottom:1px solid var(--rule);
+  }
+  .specs{ display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+  .spec{
+    font-family:var(--mono); font-size:11px; color:var(--ink-2);
+    border:1px solid var(--rule); border-radius:2px; padding:3px 8px; background:var(--surface);
+  }
+  .spec b{ color:var(--ink); font-weight:500; }
+
+  .maprow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .map{
+    font-family:var(--mono); font-size:11px; color:var(--ink-2);
+    background:var(--surface-2); border-radius:2px; padding:4px 9px;
+  }
+  .map b{ color:var(--dusk); font-weight:500; }
+
+  .grid{ display:grid; gap:26px 30px; margin-top:26px; grid-template-columns:1fr; align-items:start; }
+  @media (min-width:760px){ .grid{ grid-template-columns:1fr 1fr; } .col-shots{ grid-column:1 / -1; } }
+  @media (min-width:1180px){ .grid{ grid-template-columns:1fr 1fr 1.24fr; } .col-shots{ grid-column:auto; } }
+
+  .colhead{
+    font-family:var(--ui); font-size:10px; font-weight:600; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-3);
+    padding-bottom:7px; border-bottom:1px solid var(--rule); margin:0 0 4px;
+  }
+
+  .field{ padding:10px 0; border-bottom:1px solid var(--rule-soft); }
+  .field:last-child{ border-bottom:none; }
+  .flabel{
+    font-family:var(--ui); font-size:9.5px; font-weight:600; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--honey); margin:0 0 4px;
+  }
+  .flabel.key{ color:var(--dusk); }
+  .fval{ font-family:var(--mono); font-size:12px; line-height:1.62; color:var(--ink-2); margin:0; }
+  .fval .tag{ color:var(--dusk); }
+  .fval strong{ color:var(--ink); font-weight:500; }
+
+  .shot{ display:grid; grid-template-columns:auto 1fr; gap:0 14px; padding:12px 0; border-bottom:1px solid var(--rule-soft); }
+  .shot:last-of-type{ border-bottom:none; }
+  .tc{
+    font-family:var(--mono); font-size:10.5px; font-variant-numeric:tabular-nums;
+    color:var(--ink); background:var(--surface-2); border-radius:2px;
+    padding:3px 6px; align-self:start; white-space:nowrap;
+  }
+  .shot.flash .tc{ background:transparent; border:1px solid var(--honey); color:var(--honey); }
+  .shotnum{
+    font-family:var(--ui); font-size:9.5px; font-weight:600; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--honey); margin:0 0 3px;
+  }
+  .shotnum span{ color:var(--ink-3); letter-spacing:.08em; }
+  .shotmeta{ font-family:var(--mono); font-size:11px; color:var(--ink-3); margin:0 0 5px; }
+  .shotaction{ font-family:var(--mono); font-size:12px; line-height:1.62; color:var(--ink-2); margin:0; }
+  .shotaction q{ color:var(--ink); font-style:italic; quotes:'"' '"'; }
+  .shotaction .tag{ color:var(--dusk); }
+
+  .aside{
+    margin-top:18px; padding:14px 16px; background:var(--surface);
+    border-left:2px solid var(--honey); border-radius:0 3px 3px 0;
+  }
+  .aside h3{
+    font-family:var(--ui); font-size:9.5px; font-weight:600; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--honey); margin:0 0 6px;
+  }
+  .aside p{ font-family:var(--ui); font-size:12.5px; line-height:1.6; color:var(--ink-2); margin:0 0 8px; }
+  .aside p:last-child{ margin-bottom:0; }
+  .aside em{ color:var(--ink-3); font-style:normal; font-size:11px; }
+
+  .copyzone{
+    margin-top:30px; padding-top:22px; border-top:1px solid var(--rule);
+    display:flex; flex-wrap:wrap; align-items:center; gap:14px;
+  }
+  .btn{
+    font-family:var(--ui); font-size:13px; font-weight:600; letter-spacing:.02em;
+    color:var(--ground); background:var(--ink);
+    border:1px solid var(--ink); border-radius:3px;
+    padding:11px 22px; cursor:pointer; box-shadow:var(--shadow);
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ background:var(--honey); border-color:var(--honey); color:var(--ground); }
+  .btn:focus-visible{ outline:2px solid var(--honey); outline-offset:3px; }
+  .btn[data-done="1"]{ background:var(--honey); border-color:var(--honey); color:var(--ground); }
+  .btn-small{ padding:8px 15px; font-size:12px; background:transparent; color:var(--ink); border-color:var(--rule); }
+  .btn-small:hover{ background:var(--ink); border-color:var(--ink); color:var(--ground); }
+  .copynote{ font-family:var(--mono); font-size:11px; color:var(--ink-3); margin:0; }
+
+  @media (prefers-reduced-motion: reduce){ .btn{ transition:none; } }
+</style>
+
+<div class="wrap">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Seedance 2.0 Prompt</p>
+      <h1>Carrying Rosie</h1>
+      <p class="lede">One-sentence lede: what the scene is, ending with "Plain text, no markdown — paste straight into Seedance."</p>
+      <div class="maprow">
+        <span class="map"><b>@image_1</b> = the man</span>
+        <span class="map"><b>@image_2</b> = the old golden retriever</span>
+      </div>
+      <div class="specs">
+        <span class="spec"><b>15s</b> total</span>
+        <span class="spec"><b>4</b> shots</span>
+        <span class="spec"><b>1</b> flashback</span>
+        <span class="spec"><b>2</b> references</span>
+        <span class="spec"><b>1</b> line of dialogue</span>
+        <span class="spec"><b>3</b> tears, total</span>
+      </div>
+    </div>
+    <button class="btn btn-small" type="button" data-copy>Copy prompt</button>
+  </header>
+
+  <div class="grid">
+    <section class="col">
+      <h2 class="colhead">Cast &amp; wardrobe</h2><!-- clone-prompt: columns are Cast & wardrobe · Anchor & rules · Action -->
+
+      <div class="field">
+        <p class="flabel">Subject</p>
+        <p class="fval"><span class="tag">@image_1</span>. Identity from the reference sheet, energy, performance direction, "exactly as the reference."</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Secondary subject</p>
+        <p class="fval"><span class="tag">@image_2</span>. Only if a second reference exists; otherwise prose under "Secondary subjects" with differences from @image_1 stated.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Wardrobe <span class="tag">@image_1</span></p>
+        <p class="fval">Item by item from the sheet. <strong>Identical in every shot.</strong> One story-tied physical detail if earned.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Hero props</p>
+        <p class="fval">Named objects, tagged if referenced.</p>
+      </div>
+    </section>
+
+    <section class="col">
+      <h2 class="colhead">World &amp; rules</h2>
+
+      <div class="field">
+        <p class="flabel">Environment</p>
+        <p class="fval">Location, time, sensory detail. Label A / B if more than one.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel key">Time &amp; light rule</p>
+        <p class="fval">Only for flashbacks. Use class "key" on any extended rule field (Movement, Performance, Weight, Time &amp; light) so it reads in the secondary accent.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Mood</p>
+        <p class="fval">An arc, not a vibe.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Music</p>
+        <p class="fval">How it evolves, or @audio_N.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Color logic</p>
+        <p class="fval">Dominant palette + one accent. The page's two accent tokens come from here.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Style</p>
+        <p class="fval">Aesthetic reference + technical specs + camera behaviour.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel key">Performance rule</p>
+        <p class="fval">From references/rule-library.md when the scene has held emotion.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Logic rule</p>
+        <p class="fval">Standing locks + scene-specific continuity.</p>
+      </div>
+
+      <div class="field">
+        <p class="flabel">Negative prompt</p>
+        <p class="fval">Genre defaults to ban.</p>
+      </div>
+    </section>
+
+    <section class="col col-shots">
+      <h2 class="colhead">Shot list</h2>
+
+      <div class="shot flash">
+        <span class="tc">0:00–0:04</span>
+        <div>
+          <p class="shotnum">Shot 1 <span>· name of the beat</span></p>
+          <p class="shotmeta">MCU · 85mm · locked · warm light</p>
+          <p class="shotaction">Add class "flash" to the .shot for a flashback so its timecode chip takes the accent outline. Dialogue in <q>q tags</q>.</p>
+        </div>
+      </div>
+
+      <div class="shot">
+        <span class="tc">0:04–0:07</span>
+        <div>
+          <p class="shotnum">Shot 2 <span>· name of the beat</span></p>
+          <p class="shotmeta">MS · 50mm · locked</p>
+          <p class="shotaction">One complete arc per shot.</p>
+        </div>
+      </div>
+
+      <div class="aside">
+        <h3>What happened</h3>
+        <p>The backstory. Never depicted, never in the raw prompt.</p>
+        <p><em>Context for you — not part of the copied prompt.</em></p>
+      </div>
+    </section>
+  </div>
+
+  <div class="copyzone">
+    <button class="btn" type="button" data-copy>Copy prompt</button>
+    <p class="copynote">Copies the full plain-text prompt — every field plus all N shots.</p>
+  </div>
+</div>
+
+<script id="raw" type="text/plain">
+FORMAT: [duration]s / [N] SHOTS / [one-line concept]
+
+SUBJECT: @image_1. ...
+
+(The full plain-text prompt, exactly per the base guide's master template. This block is what the copy button copies.)
+
+---
+
+SHOT 1 — 0:00 to 0:04, MCU, 85mm, locked. FLASHBACK, warm light.
+...
+</script>
+
+<script>
+  (function () {
+    var raw = document.getElementById('raw').textContent.replace(/^\n+/, '').replace(/\s+$/, '');
+    var buttons = document.querySelectorAll('[data-copy]');
+
+    function flash(btn, label) {
+      var original = btn.getAttribute('data-label') || btn.textContent;
+      btn.setAttribute('data-label', original);
+      btn.textContent = label;
+      btn.setAttribute('data-done', '1');
+      setTimeout(function () {
+        btn.textContent = btn.getAttribute('data-label');
+        btn.removeAttribute('data-done');
+      }, 1800);
+    }
+
+    function legacyCopy() {
+      var ta = document.createElement('textarea');
+      ta.value = raw;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, raw.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(raw).then(
+            function () { flash(btn, 'Copied'); },
+            function () { flash(btn, legacyCopy() ? 'Copied' : 'Press Cmd+C'); }
+          );
+        } else {
+          flash(btn, legacyCopy() ? 'Copied' : 'Press Cmd+C');
+        }
+      });
+    });
+  })();
+</script>
