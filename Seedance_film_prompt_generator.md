@@ -28,7 +28,7 @@ If the reference smiles broadly and the scene is serious, direct the performance
 
 ### 2. Ask the four intake questions — always
 
-Use `AskUserQuestion` with all four questions in one call, each with 3–4 concrete options and a preview, options tailored to the genre the user named. Do this even when the brief seems complete. Patterns and ready-made option sets are in `references/intake-questions.md`.
+Use `AskUserQuestion` with all four questions in one call, each with 3–4 concrete options and a preview, options tailored to the genre the user named. Do this even when the brief seems complete. If you have no `AskUserQuestion` tool (Codex, or any non-Claude agent), ask all four in one plain chat message: numbered questions, lettered options, the recommended one marked, a one-line preview per option, and wait for the answers. Patterns and ready-made option sets are in `references/intake-questions.md`.
 
 1. **Setting** — where, and what the space gives you visually
 2. **The turn** — the moment the scene changes: what happens, and to whom. Every option must name a second party or a physical rule, because a cast of one has no turn
@@ -83,7 +83,7 @@ Dialogue is a plot event, not colour: every line either changes the situation or
 
 ### 7. Build the page — every time
 
-The deliverable is a published Artifact page, never a code block. Copy `references/page-template.html`, keep its CSS, JS and structure verbatim, and fill the slots:
+The deliverable is a published Artifact page, never a code block. If you have no Artifact tool (Codex, or any non-Claude agent), write the same page to `output/<scene-name>.html` in the repo and tell the user to open it in a browser and click Copy; a revision overwrites the same file. Either way, copy `references/page-template.html`, keep its CSS, JS and structure verbatim, and fill the slots:
 
 - `<title>`: a 2–4 word name specific to this scene (The Valet, Last Bus, Carrying Rosie). A new scene is a new file and a new URL; a revision republishes the same file.
 - Palette: two accent tokens drawn from the scene's own `COLOR LOGIC` (gold + steel for the casino, honey + dusk for the dog). Neutrals get a bias toward the accent. Type stays constant: Instrument Serif / Archivo / JetBrains Mono.
